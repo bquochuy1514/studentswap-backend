@@ -1,11 +1,12 @@
 export * from './packages/promotion.data';
 export * from './packages/renew.data';
 export * from './packages/membership.data';
+export * from './categories/category.data';
 
-// Hoặc export combined
 import { promotionPackages } from './packages/promotion.data';
 import { renewPackages } from './packages/renew.data';
 import { membershipPackages } from './packages/membership.data';
+import { categories } from './categories/category.data';
 
 export const allPackages = [
   ...promotionPackages,
@@ -13,4 +14,4 @@ export const allPackages = [
   ...membershipPackages,
 ];
 
-export { promotionPackages, renewPackages, membershipPackages };
+export { promotionPackages, renewPackages, membershipPackages, categories };

@@ -3,10 +3,17 @@ import { runSeeders, SeederOptions } from 'typeorm-extension';
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
 import { PackageSeeder } from './seeders';
+import { CategorySeeder } from './seeders';
 
 config();
 
 const configService = new ConfigService();
+
+// Tự động chọn path đúng theo môi trường
+const isProduction = process.env.NODE_ENV === 'production';
+const entitiesPath = isProduction
+  ? ['dist/**/*.entity.js']
+  : ['src/**/*.entity{.ts,.js}'];
 
 const options: DataSourceOptions & SeederOptions = {
   type: 'mysql',
@@ -15,8 +22,8 @@ const options: DataSourceOptions & SeederOptions = {
   username: configService.get('DB_USERNAME'),
   password: configService.get('DB_PASSWORD'),
   database: configService.get('DB_NAME'),
-  entities: ['src/**/*.entity{.ts,.js}'],
-  seeds: [PackageSeeder],
+  entities: entitiesPath,
+  seeds: [CategorySeeder, PackageSeeder],
 };
 
 const dataSource = new DataSource(options);

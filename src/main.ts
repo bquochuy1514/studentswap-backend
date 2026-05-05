@@ -50,5 +50,12 @@ async function bootstrap() {
   );
 
   await app.listen(process.env.PORT);
+
+  // Chạy seed SAU KHI app đã listen xong
+  if (process.env.RUN_SEED === 'true') {
+    const { execSync } = require('child_process');
+    console.log('🌱 Running seeders...');
+    execSync('npm run seed:prod', { stdio: 'inherit' });
+  }
 }
 bootstrap();
