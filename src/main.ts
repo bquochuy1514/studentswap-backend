@@ -9,15 +9,6 @@ import {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // JWT Secret Strength Validation
-  const jwtSecret = process.env.JWT_SECRET;
-  if (!jwtSecret || jwtSecret.length < 32) {
-    throw new Error(
-      '[SECURITY] JWT_SECRET is too weak or missing. ' +
-        'Must be at least 32 characters long. Server startup aborted.',
-    );
-  }
-
   app.enableCors({
     origin: [
       process.env.FRONTEND_URL,
@@ -50,12 +41,5 @@ async function bootstrap() {
   );
 
   await app.listen(process.env.PORT);
-
-  // Chạy seed SAU KHI app đã listen xong
-  if (process.env.RUN_SEED === 'true') {
-    const { execSync } = require('child_process');
-    console.log('🌱 Running seeders...');
-    execSync('npm run seed:prod', { stdio: 'inherit' });
-  }
 }
 bootstrap();
