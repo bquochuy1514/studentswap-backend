@@ -9,9 +9,9 @@ import { Match } from '../../../common/decorators/match.decorator';
 
 export class RegisterDto {
   @IsEmail({}, { message: 'Email phải có định dạng hợp lệ' })
-  @Matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.edu(\.vn)?$/, {
-    message: 'Chỉ chấp nhận email có đuôi .edu hoặc .edu.vn',
-  })
+  // @Matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.edu(\.vn)?$/, {
+  //   message: 'Chỉ chấp nhận email có đuôi .edu hoặc .edu.vn',
+  // })
   @IsNotEmpty({ message: 'Email không được để trống' })
   email: string;
 
